@@ -1,27 +1,24 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-if [[ -s "${ZDOTDIR:-$HOME}/.zshrc.local" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zshrc.local"
-fi
+fpath=(/usr/local/share/zsh-completions $fpath)
 
-# Customize to your needs...
+test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
 #source ~/.bin/tmuxinator.zsh
 alias gw="$HOME/src/gdub/bin/gw"
+alias gradle=gw
 
-fpath=(/usr/local/share/zsh-completions $fpath)
+cobertura='upfind -name "build.gradle" | head -1 | xargs dirname | xargs -I {} open "{}/build/reports/cobertura/index.html"'
+jacoco='upfind -name "build.gradle" | head -1 | xargs dirname | xargs -I {} open "{}/build/reports/jacoco/test/html/index.html"'
+gdeps='gw dependencies | grep "\-\-\-" | grep -o -e "\w.*:.*"  | sed "s/\(.*\):.* -> \(.*\)/\1:\2/" | sort -u | grep -v -e "\*"'
 
-PATH=$PATH:~/bin
+alias ezshrc='subl ~/.zshrc'
+alias szshrc='source ~/.zshrc'
+alias ezshenv='subl ~/.zshenv'
+alias szshenv='source ~/.zshenv'
 
 # why would you type 'cd dir' if you could just type 'dir'?
 setopt AUTO_CD
@@ -56,9 +53,12 @@ setopt ZLE
 
 setopt NO_HUP
 
-# only fools wouldn't do this ;-)
-export EDITOR="subl -n -w"
-export VISUAL="subl -n -w"
+if [[ -f `which subl` ]]; then
+  export VISUAL="subl -n -w"
+else
+  export VISUAL="vim"
+fi
+export EDITOR="$VISUAL"
 
 setopt IGNORE_EOF
 
@@ -101,8 +101,3 @@ bindkey -M vicmd "q" push-line
 # it's like, space AND completion.  Gnarlbot.
 bindkey -M viins ' ' magic-space
 
-bindkey -M vicmd "/" history-incremental-search-backward
-bindkey -M vicmd "?" history-incremental-search-backward
-bindkey -M vicmd "//" history-beginning-search-backward
-bindkey -M vicmd "??" history-beginning-search-backward
-bindkey -M vicmd "q" push-line

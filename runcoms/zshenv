@@ -1,15 +1,27 @@
-#
-# Defines environment variables.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
-if [[ -s "${ZDOTDIR:-$HOME}/.zshenv.local" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zshenv.local"
-fi
+# Java
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export PATH=$PATH:$JAVA_HOME/bin
+
+# Maven
+export MAVEN_HOME=/usr/local/installs/maven/current
+export M2_HOME=/usr/local/installs/maven/current
+export MAVEN_OPTS='-Xmx2048m -XX:MaxPermSize=512m -XX:CompileCommand=exclude,com/infusion/databridge/MemoryRst,loadMeta'
+export PATH=$PATH:$MAVEN_HOME/bin
+
+# Tomcat 7
+export TOMCAT_HOME=/usr/local/installs/tomcat/current
+export PATH=$PATH:$TOMCAT_HOME/bin
+
+# Ant
+export ANT_HOME=/usr/local/installs/ant/current
+export PATH=$PATH:$ANT_HOME/bin
+
+# MySQL
+export PATH=$PATH:/usr/local/mysql/bin
+
+export PATH=$PATH:$HOME/bin
