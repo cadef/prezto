@@ -11,9 +11,9 @@ test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_in
 alias gw="$HOME/src/gdub/bin/gw"
 alias gradle=gw
 
-cobertura='upfind -name "build.gradle" | head -1 | xargs dirname | xargs -I {} open "{}/build/reports/cobertura/index.html"'
-jacoco='upfind -name "build.gradle" | head -1 | xargs dirname | xargs -I {} open "{}/build/reports/jacoco/test/html/index.html"'
-gdeps='gw dependencies | grep "\-\-\-" | grep -o -e "\w.*:.*"  | sed "s/\(.*\):.* -> \(.*\)/\1:\2/" | sort -u | grep -v -e "\*"'
+alias cobertura='upfind -name "build.gradle" | head -1 | xargs dirname | xargs -I {} open "{}/build/reports/cobertura/index.html"'
+alias jacoco='upfind -name "build.gradle" | head -1 | xargs dirname | xargs -I {} open "{}/build/reports/jacoco/test/html/index.html"'
+alias gdeps='gw dependencies | grep "\-\-\-" | grep -o -e "\w.*:.*"  | sed "s/\(.*\):.* -> \(.*\)/\1:\2/" | sort -u | grep -v -e "\*"'
 
 alias ezshrc='subl ~/.zshrc'
 alias szshrc='source ~/.zshrc'
