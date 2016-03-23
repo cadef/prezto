@@ -35,10 +35,7 @@ pmods=(
   'utility' \
   'completion' \
   'git' \
-  'tmux' \
-  'syntax-highlighting' \
-  'history-substring-search' \
-  'prompt'
+  'tmux'
 )
 
 if [[ `uname` == 'Darwin' ]]
@@ -50,6 +47,12 @@ then
 
   zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 fi
+
+pmods+=(
+  'syntax-highlighting' \
+  'history-substring-search' \
+  'prompt'
+  )
 
 zstyle ':prezto:load' pmodule $pmods
 unset pmods
