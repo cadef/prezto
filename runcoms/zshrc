@@ -3,9 +3,12 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-fpath=(/usr/local/share/zsh-completions $fpath)
+#fpath=(/usr/local/share/zsh-completions $fpath)
 
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+
+# Enables shell command completion for gcloud.
+source '/Users/cade.fassett/google-cloud-sdk/completion.zsh.inc'
 
 #source ~/.bin/tmuxinator.zsh
 alias gw="$HOME/src/gdub/bin/gw"
